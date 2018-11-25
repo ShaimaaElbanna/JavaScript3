@@ -72,7 +72,7 @@
 
   function Dropdown (list, parent) {
     const main = createAndAppend("div",root,{class:"main"})
-    const log = createAndAppend("h2",main,{text: "HYF Repositories",class:"logo",src:"hyf.png" })
+    const log = createAndAppend("h2",main,{text: "HYF Repositories  ",class:"logo",src:"hyf.png" })
     const select = createAndAppend("select", main)
      list.sort();
     for (let i =0; i < list.length; i++){
