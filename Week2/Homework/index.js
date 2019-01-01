@@ -34,22 +34,22 @@
 
 
   function draw(parent, obj) {
-    parent.innerHTML = ""
+   parent.innerHTML = ""
     const theData = createAndAppend("div", parent,{class:"theData"});
-    const Repositoryh2   = createAndAppend("h2", theData,{text:"Repository : "})
-    const Repository   = createAndAppend("p", theData,{text:obj.name})
+    createAndAppend("h2", theData,{text:"Repository : "})
+    createAndAppend("p", theData,{text:obj.name})
    if (obj.description != null){
-    const descriptionh2   = createAndAppend("h2", theData,{text:"\n Description : "})
-    const Description   = createAndAppend("p", theData,{text:obj.description})
+    createAndAppend("h2", theData,{text:"\n Description : "})
+    createAndAppend("p", theData,{text:obj.description})
   }
   if (obj.forks != null){
-    const Forksh2 = createAndAppend("h2", theData,{text:"\nForks :	"})
-    const Forks  = createAndAppend("p", theData,{text:obj.forks})
+    createAndAppend("h2", theData,{text:"\nForks :	"})
+    createAndAppend("p", theData,{text:obj.forks})
   }
   if (obj.updated_at != null){
-    const Updatedh2 = createAndAppend("h2", theData,{text:"\nUpdated at :	"})
+    createAndAppend("h2", theData,{text:"\nUpdated at :	"})
     let date = new Date(obj.updated_at);
-    const Updated  = createAndAppend("p", theData,{text: date})
+    createAndAppend("p", theData,{text: date})
    // console.log(obj);
   }
     
@@ -77,12 +77,13 @@
     const select = createAndAppend("select", main)
      list.sort();
     for (let i =0; i < list.length; i++){
-      
-      const option = createAndAppend("option",select, {value: i, text : list[i].name}) 
     list.sort((a,b) => {
      return a.name.localeCompare(b.name) 
     });
-    }
+    createAndAppend("option",select, {value: i, text : list[i].name}) 
+    console.log(i, list[i].name)
+  
+  }
     
     const boxes = createAndAppend("div", root,{class:"boxes"})
     select.onchange = function () {
