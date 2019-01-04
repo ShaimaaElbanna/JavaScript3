@@ -1,19 +1,22 @@
 'use strict';
 
 { 
-  function fetchJSON(url, cb) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.responseType = 'json';
-    xhr.onload = () => {
-      if (xhr.status < 400) {
-        cb(null, xhr.response);
-      } else {
-        cb(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
-      }
-    };
-    xhr.onerror = () => cb(new Error('Network request failed'));
-    xhr.send();
+
+  function fetchJSON(url) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.responseType = 'json';
+      xhr.onload = () => {
+        if (xhr.status < 400) {
+          resolve(xhr.response);
+        } else {
+          reject(`Network error: ${xhr.status} - ${xhr.statusText}`);
+        }
+      };
+      xhr.onerror = () => reject(new Error('Network request failed'));
+      xhr.send();
+    });
   }
 
   function createAndAppend(name, parent, options = {}) {
@@ -53,22 +56,27 @@
    // console.log(obj);
   }
     
-    fetchJSON(obj.contributors_url, (err, data) => {
-      //console.log(data)
-      const Contributions = createAndAppend("div", parent,{class:"Contributions"});
+fetchJSON(obj.contributors_url)
+.then(data =>{
+    //console.log(data)
+    const Contributions = createAndAppend("div", parent,{class:"Contributions"});
       
-      const row = createAndAppend("div",Contributions,{class: "row"});
-        for (let i = 0; i < data.length; i++){
-          const column = createAndAppend("div", row,{class:"column"})
-          createAndAppend("img",column,{src:data[i].avatar_url, class:"photo"})
-          const card = createAndAppend("div", column,{class: "card"});
-          const container = createAndAppend("div", card,{class:"container"})
-          createAndAppend ("h2",container,{text:data[i].login})
-          createAndAppend("p",container,{text: data[i].contributions, class:"numbers"})
-          let theLink = createAndAppend("a",container,{class: "link",href:data[i].html_url, class:"profile", target: "self"})
-          createAndAppend("button", theLink,{text:"Profile", class:"button"})
-        }
-  })
+    const row = createAndAppend("div",Contributions,{class: "row"});
+      for (let i = 0; i < data.length; i++){
+        const column = createAndAppend("div", row,{class:"column"})
+        createAndAppend("img",column,{src:data[i].avatar_url, class:"photo"})
+        const card = createAndAppend("div", column,{class: "card"});
+        const container = createAndAppend("div", card,{class:"container"})
+        createAndAppend ("h2",container,{text:data[i].login})
+        createAndAppend("p",container,{text: data[i].contributions, class:"numbers"})
+        let theLink = createAndAppend("a",container,{class: "link",href:data[i].html_url, class:"profile", target: "self"})
+        createAndAppend("button", theLink,{text:"Profile", class:"button"})
+      }
+})
+.catch(err=> {
+  createAndAppend('div', root, { text: err.message, class: 'alert-error' });
+
+})
 }
 
   function Dropdown (list, parent) {
@@ -94,21 +102,23 @@
     return select
   }
 
+  
+
   function main(url) {
-    fetchJSON(url, (err, data) => {
+    fetchJSON(url)
+    .then((data) =>{
       const root = document.getElementById('root');
       //console.log(data[0].description)
       const namesMenu = Dropdown(data, root)
-
-      if (err) {
-        createAndAppend('div', root, { text: err.message, class: 'alert-error' });
-      } else {
-//       createAndAppend('pre', root, { text: JSON.stringify(data, null, 2) });
-      }
+    })
+    .catch((err) =>{
+      createAndAppend('div', root, { text: err.message, class: 'alert-error' });
     });
+
   }
 
   const HYF_REPOS_URL = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 
   window.onload = () => main(HYF_REPOS_URL);
+
 }
