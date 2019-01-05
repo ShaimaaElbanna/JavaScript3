@@ -1,0 +1,145 @@
+.Error{
+  background-color: white
+}
+.alert-error {
+  color: red;
+}
+@media screen and (max-width: 650px) {
+.column {
+  text-align: center;
+  float: left;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  background-color: #ffffff;
+  color: black;
+  margin: 5px;
+  width: 40%;
+  display: block;
+}
+.theData{
+margin: auto;
+border: 3px solid black;
+background-color: white;
+padding: 1em;  
+max-width: 100%;
+color: black;
+width: 100%;
+}
+}
+
+select {
+  font-size: 14px;
+  width: 250px;
+  height: 32px;
+  padding: 2px;
+}
+.main{
+  text-align: center;
+  margin: auto;
+  border: 3px solid black;
+width: 50%;
+padding: 1%;
+}
+.logo{
+  font-size: 36px;
+  display: inline !important;
+
+}
+.theData h2, .theData p{
+  display: inline !important;
+}
+.photo{
+  margin-top: 10px;
+  width: 100%;
+}
+
+
+p.numbers {
+  border-radius: 100%;
+  text-align: center;
+  margin: auto;
+  background-color: #FFC0CB;
+  border: 5px solid #FFC0CB;
+  width: 50px;
+  height: 50px;
+  padding-top:12px; 
+}
+
+html {
+  box-sizing: border-box;
+background-color: #918686b6;
+color: white;
+background: url(https://4cornerscreative.com/wp-content/uploads/2016/09/Black-Background-Images-14.jpg) no-repeat center fixed; 
+background-size: cover;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h2 {
+font-family: 'Ranga', cursive;
+width: 100%;
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-inline-start: 0px;
+  font-weight: bold;
+  
+}
+.card h2{
+margin-inline-end: 10px;
+}
+@media screen and (min-width: 650px) {
+.column {
+  text-align: center;
+  float: left;
+  width: 15%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  background-color: #ffffff;
+  color: black;
+  margin: 5px;
+}
+.theData{
+width:  50%;
+margin: auto;
+border: 3px solid black;
+background-color: white;
+padding: 1em;  
+max-width: 100%;
+color: black
+}
+}
+ .row{
+    margin: auto;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+.button {
+  margin-top: 10px;
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px 16px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.button:hover {
+  background-color: #555;
+}
