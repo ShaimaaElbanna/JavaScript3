@@ -1,7 +1,7 @@
 'use strict';
 
 { 
-
+  
   function fetchJSON(url) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -55,7 +55,12 @@
     createAndAppend("p", theData,{text: date})
    // console.log(obj);
   }
-    
+  
+  
+
+
+
+
 fetchJSON(obj.contributors_url)
 .then(data =>{
     //console.log(data)
