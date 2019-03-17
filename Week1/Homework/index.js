@@ -36,25 +36,25 @@
   function draw(parent, obj) {
     parent.innerHTML = ""
     const theData = createAndAppend("div", parent,{class:"theData"});
-    const Repositoryh2   = createAndAppend("h2", theData,{text:"Repository : "})
-    const Repository   = createAndAppend("p", theData,{text:obj.name})
+    createAndAppend("h2", theData,{text:"Repository : "})
+    createAndAppend("p", theData,{text:obj.name})
    if (obj.description != null){
-    const descriptionh2   = createAndAppend("h2", theData,{text:"\n Description : "})
-    const Description   = createAndAppend("p", theData,{text:obj.description})
+    createAndAppend("h2", theData,{text:"\n Description : "})
+    createAndAppend("p", theData,{text:obj.description})
   }
   if (obj.forks != null){
-    const Forksh2 = createAndAppend("h2", theData,{text:"\nForks :	"})
-    const Forks  = createAndAppend("p", theData,{text:obj.forks})
+    createAndAppend("h2", theData,{text:"\nForks :	"})
+    createAndAppend("p", theData,{text:obj.forks})
   }
   if (obj.updated_at != null){
-    const Updatedh2 = createAndAppend("h2", theData,{text:"\nUpdated at :	"})
+    createAndAppend("h2", theData,{text:"\nUpdated at :	"})
     let date = new Date(obj.updated_at);
-    const Updated  = createAndAppend("p", theData,{text: date})
+    createAndAppend("p", theData,{text: date})
    // console.log(obj);
   }
     
     fetchJSON(obj.contributors_url, (err, data) => {
-      //console.log(data)
+      console.log(data)
       const Contributions = createAndAppend("div", parent,{class:"Contributions"});
       
       const row = createAndAppend("div",Contributions,{class: "row"});
@@ -72,16 +72,21 @@
 }
 
   function Dropdown (list, parent) {
+
     const main = createAndAppend("div",root,{class:"main"})
     const log = createAndAppend("h2",main,{text: "HYF Repositories  ",class:"logo",src:"hyf.png" })
     const select = createAndAppend("select", main)
-     list.sort();
-    for (let i =0; i < list.length; i++){
-      
-      const option = createAndAppend("option",select, {value: i, text : list[i].name}) 
-    list.sort((a,b) => {
-     return a.name.localeCompare(b.name) 
-    });
+    //console.log(list); 
+    list.sort();
+    list.unshift( {name: '1 Choose Your Repository'})
+
+    for (let i = 0; i < list.length; i++){
+      list.sort((a,b) => {
+        return a.name.localeCompare(b.name) 
+      });
+    createAndAppend("option",select, {value: i, text : list[i].name}) 
+    //console.log(i, list[i].name)
+
     }
     
     const boxes = createAndAppend("div", root,{class:"boxes"})
